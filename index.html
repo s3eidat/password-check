@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Password Check — How Strong Is Your Password? Free &amp; Private | S3eidat Tools</title>
+<meta name="description" content="Check password strength locally: spots common passwords, dictionary words, keyboard walks, sequences, repeats, dates and l33t. Estimated crack times and concrete tips. Never sent or stored.">
+<meta property="og:title" content="Password Check — how strong is your password, really?">
+<meta property="og:description" content="Pattern-aware password strength check that runs 100% in your browser. Never sent or stored.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+</head>
+<body data-tool="password-check">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Password Check</h1>
+    <p>How strong is your password, really? This looks for the patterns attackers try first, not just length and symbols.</p>
+  </section>
+
+  <div class="pc-notice">
+    <svg class="i"><use href="#i-lock"/></svg>
+    <div><b>Checked on this device only.</b> Your password is never sent, saved or logged. This page has no server and the browser blocks any network request it might try.</div>
+  </div>
+
+  <section class="card mt">
+    <label class="field" for="pw">Password to check</label>
+    <div class="pc-inputrow mt">
+      <input type="password" class="input mono pc-input" id="pw" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type or paste a password" dir="auto">
+      <button class="btn" id="show" aria-pressed="false"><span>Show</span></button>
+      <button class="btn ghost icon" id="clear" aria-label="Clear"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="pc-meter mt" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="row between mt">
+      <span class="chip" id="score">Type a password</span>
+      <span class="faint" id="bits"></span>
+    </div>
+  </section>
+
+  <div class="grid-2 mt pc-grid">
+    <section class="card">
+      <h2>Time to crack</h2>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Attack</th><th>Time</th></tr></thead>
+          <tbody id="times">
+            <tr><td>Online, rate-limited <span class="faint">100 / hour</span></td><td>—</td></tr>
+            <tr><td>Online, no limit <span class="faint">10 / second</span></td><td>—</td></tr>
+            <tr><td>Offline, slow hash <span class="faint">10k / second (bcrypt)</span></td><td>—</td></tr>
+            <tr><td>Offline, fast hash <span class="faint">10B / second (GPU, MD5)</span></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 class="mt">What an attacker sees</h2>
+      <div id="parts" class="pc-parts"><span class="faint">Your password split into the cheapest-to-guess pieces will show here.</span></div>
+    </section>
+
+    <section class="card">
+      <h2>Tips</h2>
+      <ul id="tips" class="pc-tips"><li class="muted">Start typing to get advice for your password.</li></ul>
+      <div class="stats mt" id="stats"></div>
+    </section>
+  </div>
+
+  <section class="card mt">
+    <h2>How the estimate works</h2>
+    <p class="muted pc-how">The checker finds every pattern in your password: <b>1,282 common passwords</b>, <b>2,381 English words</b>
+      (also reversed, capitalised or with l33t swaps like <code>@</code>→<code>a</code>), <b>keyboard walks</b> (<code>qwerty</code>, <code>1qaz</code>),
+      <b>sequences</b> (<code>abc</code>, <code>9876</code>), <b>repeats</b> (<code>aaa</code>, <code>abcabc</code>), <b>years and dates</b>, then picks the
+      cheapest way to cover the whole password and counts the guesses that takes. The word lists are small so they fit in the page,
+      which means unusual words or names it doesn't know may score higher than they deserve. Treat the result as an upper bound.</p>
+  </section>
+</main>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
